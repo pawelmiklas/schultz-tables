@@ -117,6 +117,7 @@ select {
 	border-bottom: 1px solid gray;
 	width: 120px;
 	margin-right: 20px;
+	background-color: white;
 }
 
 select:focus {
