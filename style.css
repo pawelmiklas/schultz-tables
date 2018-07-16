@@ -6,22 +6,23 @@
 }
 
 p {
-	margin-right: 10px;
-	margin-left: 40px;
 	line-height: 30px;
 }
-#time{
+
+#time {
 	margin: 0px;
 }
-.menu-time{
+
+.menu-time {
 	display: flex;
 	flex-direction: row;
-	width: 180px;
+	width: 100px;
 }
-button{
+
+#btn {
 	margin-left: 40px;
-	width: 110px;
-	background-color:#f4ac66;
+	min-width: 110px;
+	background-color: #f4ac66;
 	color: white;
 	border: none;
 	line-height: 20px;
@@ -35,11 +36,11 @@ button{
 	box-shadow: 1px 1px 10px gray;
 }
 
-button:focus{
+#btn:focus {
 	outline: 0;
 }
 
-nav{
+nav {
 	width: 100%;
 	height: 55px;
 	background-color: #f4ac66;
@@ -47,26 +48,28 @@ nav{
 	padding: 0px 200px;
 }
 
-ul{
+ul {
 	display: flex;
 	flex-direction: row;
 	height: 100%;
 	min-width: 240px;
 }
-li{
+
+li {
 	line-height: 50px;
 	width: 120px;
 	list-style-type: none;
 	text-align: center;
 	transition: 0.3s;
 }
+
 li a {
 	text-decoration: none;
 	color: white;
 	letter-spacing: 0.5px;
 }
 
-li:hover{
+li:hover {
 	background-color: darkorange;
 }
 
@@ -75,6 +78,7 @@ li:hover{
 	justify-content: center;
 	padding: 30px 0px;
 	margin-bottom: 60px;
+	height: 90px;
 }
 
 .main {
@@ -105,5 +109,20 @@ table {
 
 tr,
 td {
+	text-align: center;
+}
+
+select {
+	border: none;
+	border-bottom: 1px solid gray;
+	width: 120px;
+	margin-right: 20px;
+}
+
+select:focus {
+	outline: 0;
+}
+
+option {
 	text-align: center;
 }

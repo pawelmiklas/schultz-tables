@@ -8,26 +8,42 @@ document.addEventListener("DOMContentLoaded", function () {
 	let counter_time_ms = 0;
 	let time = 0;
 	let clear_time = 0;
+	let alert_value = 0;
 	btn.addEventListener("click", function () {
 		let size = document.getElementById("size");
 		let cell_size = document.getElementById("cell-size");
 		let border = document.getElementById("border");
+		let type = document.getElementById("type");
 		let size_with_value = size.options[size.selectedIndex].value;
 		let cell_sice_with_value = cell_size.options[cell_size.selectedIndex].value;
 		let border_with_value = border.options[border.selectedIndex].value;
+		let type_with_value = type.options[type.selectedIndex].value;
 		let tab_with_numbers = [];
+		let tab_with_letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "w", "x", "y", "z"];
 		let counter_of_whiles = 0;
 		let tab = document.getElementsByTagName("table");
 		let td = document.getElementsByTagName("td");
 		let tr = document.getElementsByTagName("tr");
 		let p_time = document.getElementById("time");
 
+		/*
+				function select_type() {
+					if (type_with_value == 1) {
+
+					} else if (type_with_value == 2) {
+						let size_table_letters = size_with_value * size_with_value;
+						
+					}
+				}
+		*/
 		// Add numbers to array 
 		for (let i = 1; i <= size_with_value * size_with_value; i++) {
 			tab_with_numbers[i] = i;
 		}
 		// Sort random table
 		tab_with_numbers.sort(() => Math.random() - 0.5);
+
+
 
 		// Generate table
 		function generate_table() {
@@ -52,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		// Set a value of border style
 		function set_value_of_border() {
-			if (border_with_value != 1) {
+			if (border_with_value == 2) {
 				for (let i = tab.length - 1; i >= 0; i--) {
 					tab[i].style.border = "1px solid white";
 				}
@@ -106,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			counter_time_ms++;
 			if (counter_time_second < 10) {
 				p_time.innerHTML = "0" + counter_time_minute + " : " + "0" + counter_time_second + " : " + counter_time_ms;
-			} else if (counter_time_second >=10){
+			} else if (counter_time_second >= 10) {
 				p_time.innerHTML = "0" + counter_time_minute + " : " + counter_time_second + " : " + counter_time_ms;
 			}
 
@@ -120,30 +136,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			if (counter_time_minute >= 10 && counter_time_second < 10) {
 				p_time.innerHTML = counter_time_minute + " : " + "0" + counter_time_second + " : " + counter_time_ms;
-			} else if (counter_time_minute >= 10 && counter_time_second >= 10){
+			} else if (counter_time_minute >= 10 && counter_time_second >= 10) {
 				p_time.innerHTML = counter_time_minute + " : " + counter_time_second + " : " + counter_time_ms;
 			}
 		}
 
 		//changing state of button
-		if (counter_btn % 2 == 0) {
-			btn.innerHTML = "STOP";
-			counter_btn++;
-
-			// call the function
-			removing_table_every_click();
-			generate_table();
-			set_value_of_border();
-			set_value_of_cell();
-			timer();
+		if (size_with_value < 3) {
+			alert("Select a size of table");
 		} else {
-			btn.innerHTML = "START";
-			counter_btn++;
-			clearInterval(time);
-			counter_time_minute = 0;
-			counter_time_ms = 0;
-			counter_time_second = 0;
+			if (counter_btn % 2 == 0) {
+				btn.innerHTML = "STOP";
+				counter_btn++;
+
+				// call the function
+				removing_table_every_click();
+				generate_table();
+				set_value_of_border();
+				set_value_of_cell();
+				timer();
+
+			} else {
+				btn.innerHTML = "START";
+				counter_btn++;
+				clearInterval(time);
+				counter_time_minute = 0;
+				counter_time_ms = 0;
+				counter_time_second = 0;
+			}
 		}
+
 
 
 	})
