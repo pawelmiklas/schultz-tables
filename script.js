@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	let time = 0;
 	let clear_time = 0;
 	let alert_value = 0;
+	let menu_time = document.querySelector(".menu-time");
 	btn.addEventListener("click", function () {
 		let size = document.getElementById("size");
 		let cell_size = document.getElementById("cell-size");
@@ -19,31 +20,25 @@ document.addEventListener("DOMContentLoaded", function () {
 		let border_with_value = border.options[border.selectedIndex].value;
 		let type_with_value = type.options[type.selectedIndex].value;
 		let tab_with_numbers = [];
-		let tab_with_letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "w", "x", "y", "z"];
+		let tab_with_letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 		let counter_of_whiles = 0;
 		let tab = document.getElementsByTagName("table");
 		let td = document.getElementsByTagName("td");
 		let tr = document.getElementsByTagName("tr");
 		let p_time = document.getElementById("time");
 
-		/*
-				function select_type() {
-					if (type_with_value == 1) {
-
-					} else if (type_with_value == 2) {
-						let size_table_letters = size_with_value * size_with_value;
-						
-					}
-				}
-		*/
 		// Add numbers to array 
 		for (let i = 1; i <= size_with_value * size_with_value; i++) {
 			tab_with_numbers[i] = i;
 		}
+
+		// Select a size of table with letters to randomize
+		let size_of_letters = size_with_value * size_with_value;
+		tab_with_letters.splice(size_of_letters, 24);
+
 		// Sort random table
 		tab_with_numbers.sort(() => Math.random() - 0.5);
-
-
+		tab_with_letters.sort(() => Math.random() - 0.5);
 
 		// Generate table
 		function generate_table() {
@@ -55,10 +50,17 @@ document.addEventListener("DOMContentLoaded", function () {
 				for (let j = 0; j < size_with_value; j++) {
 					let cell = document.createElement("td");
 					cell.setAttribute("class", "cell_list");
-					let number = document.createTextNode(tab_with_numbers[counter_of_whiles]);
-					counter_of_whiles++;
-					cell.appendChild(number);
-					row.appendChild(cell);
+					if (type_with_value == 1) {
+						let number = document.createTextNode(tab_with_numbers[counter_of_whiles]);
+						counter_of_whiles++;
+						cell.appendChild(number);
+						row.appendChild(cell);
+					} else if (type_with_value == 2) {
+						let letter = document.createTextNode(tab_with_letters[counter_of_whiles]);
+						counter_of_whiles++;
+						cell.appendChild(letter);
+						row.appendChild(cell);
+					}
 				}
 				table.appendChild(row);
 			}
@@ -142,10 +144,11 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		//changing state of button
-		if (size_with_value < 3) {
-			alert("Select a size of table");
+		if (size_with_value == 100 || cell_sice_with_value == 100 || border_with_value == 100 || type_with_value == 100) {
+			alert("Select all options");
 		} else {
 			if (counter_btn % 2 == 0) {
+				menu_time.style.display = "flex";
 				btn.innerHTML = "STOP";
 				counter_btn++;
 

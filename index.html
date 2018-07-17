@@ -7,52 +7,48 @@
 	<link href="https://fonts.googleapis.com/css?family=Oxygen:400,700&amp;subset=latin-ext" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="/fontello/css/fontello.css">
 </head>
 
 <body>
 	<nav>
 		<ul>
-			<li><a href="">Home</a></li>
-			<li><a href="">Info</a></li>
+			<li><a href="index.html">Home</a></li>
+			<li><a href="/info/index.html">Info</a></li>
 		</ul>
 	</nav>
 	<div class="menu">
-		<!--		<p>Size:</p>-->
 		<select name="size" id="size">
-				<option value="0"selected disabled>Size</option>
+				<option value="100"selected disabled>Size</option>
 				<option value="3">&nbsp;3</option>
 				<option value="4">&nbsp;4</option>
 				<option value="5">&nbsp;5</option>
 		</select>
-		<!--		<p>Difficulty level:</p>-->
 		<select name="cell-size" id="cell-size">
-			<option selected disabled>Difficult level</option>
+			<option selected disabled value="100">Difficult level</option>
 			<option value="0">Begginer</option>
 			<option value="10">Easy</option>
 			<option value="20">Medium</option>
 			<option value="30">Hard</option>
 			<option value="40">Expert</option>
 		</select>
-		<!--		<p>Border:</p>-->
 		<select name="border" id="border">
-			<option selected disabled>Border</option>
+			<option selected disabled value="100">Border</option>
 			<option value="1">With Border</option>
 			<option value="2">Without Border</option>
 		</select>
-		<!--		<p>Type:</p>-->
 		<select name="type" id="type">
-			<option selected disabled>Type</option>
+			<option selected disabled value="100">Type</option>
 			<option value="1">Numbers</option>
 			<option value="2">Letters</option>
-		</select>
-
-		<div class="menu-time">
-			<!--			<p>Time:</p>-->
-			<p id="time"></p>
-		</div>
+		</select>	
 		<button id="btn">
 			START
 		</button>
+	</div>
+	<div class="menu-time">
+		<i class="demo-icon icon-stopwatch"></i>
+		<p id="time"></p>
 	</div>
 	<div class="main">
 
