@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
   let btn = document.getElementById("btn");
   let main = document.querySelector(".main");
   let counter = 0;
-  let counterBtn = 0;
+  let counterBtn = true;
   let counterTimeMinute = 0;
   let counterTimeSeconds = 0;
   let counterTimeMs = 0;
@@ -176,11 +176,10 @@ document.addEventListener("DOMContentLoaded", function() {
           pTime.innerHTML = `${counterTimeMinute} : ${counterTimeSeconds} : ${counterTimeMs}`;
         }
       }
-      if (counterBtn % 2 == 0) {
+      if (counterBtn) {
         menu_time.style.display = "flex";
         btn.innerHTML = "STOP";
-        counterBtn++;
-
+        counterBtn = !counterBtn;
         // call the function
         removingTableEveryClick();
         generateTable();
@@ -189,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function() {
         timer();
       } else {
         btn.innerHTML = "START";
-        counterBtn++;
+        counterBtn = !counterBtn;
         clearInterval(time);
         counterTimeMinute = 0;
         counterTimeMs = 0;
