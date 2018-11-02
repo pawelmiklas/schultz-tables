@@ -1,175 +1,200 @@
-document.addEventListener("DOMContentLoaded", function () {
-	let btn = document.getElementById("btn");
-	let main = document.querySelector(".main");
-	let counter = 0;
-	let counter_btn = 0;
-	let counter_time_minute = 0;
-	let counter_time_second = 0;
-	let counter_time_ms = 0;
-	let time = 0;
-	let clear_time = 0;
-	let alert_value = 0;
-	let menu_time = document.querySelector(".menu-time");
-	btn.addEventListener("click", function () {
-		let size = document.getElementById("size");
-		let cell_size = document.getElementById("cell-size");
-		let border = document.getElementById("border");
-		let type = document.getElementById("type");
-		let size_with_value = size.options[size.selectedIndex].value;
-		let cell_sice_with_value = cell_size.options[cell_size.selectedIndex].value;
-		let border_with_value = border.options[border.selectedIndex].value;
-		let type_with_value = type.options[type.selectedIndex].value;
-		let tab_with_numbers = [];
-		let tab_with_letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-		let counter_of_whiles = 0;
-		let tab = document.getElementsByTagName("table");
-		let td = document.getElementsByTagName("td");
-		let tr = document.getElementsByTagName("tr");
-		let p_time = document.getElementById("time");
+document.addEventListener("DOMContentLoaded", function() {
+  let btn = document.getElementById("btn");
+  let main = document.querySelector(".main");
+  let counter = 0;
+  let counterBtn = 0;
+  let counterTimeMinute = 0;
+  let counterTimeSeconds = 0;
+  let counterTimeMs = 0;
+  let time = 0;
+  let menu_time = document.querySelector(".menu-time");
+  btn.addEventListener("click", function() {
+    let size = document.getElementById("size");
+    let cellSize = document.getElementById("cell-size");
+    let border = document.getElementById("border");
+    let type = document.getElementById("type");
+    let sizeWithValue = size.options[size.selectedIndex].value;
+    let cellSizeWithValue = cellSize.options[cellSize.selectedIndex].value;
+    let borderWithValue = border.options[border.selectedIndex].value;
+    let typeWithValue = type.options[type.selectedIndex].value;
+    if (
+      !typeWithValue ||
+      !borderWithValue ||
+      !cellSizeWithValue ||
+      !sizeWithValue
+    ) {
+      return;
+    } else {
+      let arrayWithNumbers = [];
+      let arrayWithLetters = [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m",
+        "n",
+        "o",
+        "p",
+        "r",
+        "s",
+        "t",
+        "u",
+        "v",
+        "w",
+        "x",
+        "y",
+        "z"
+      ];
+      let counterOfWhiles = 0;
+      let tab = document.getElementsByTagName("table");
+      let td = document.getElementsByTagName("td");
+      let tr = document.getElementsByTagName("tr");
+      let pTime = document.getElementById("time");
 
-		// Add numbers to array 
-		for (let i = 1; i <= size_with_value * size_with_value; i++) {
-			tab_with_numbers[i] = i;
-		}
+      // Add numbers to array
+      for (let i = 1; i <= sizeWithValue * sizeWithValue; i++) {
+        arrayWithNumbers[i] = i;
+      }
 
-		// Select a size of table with letters to randomize
-		let size_of_letters = size_with_value * size_with_value;
-		tab_with_letters.splice(size_of_letters, 24);
+      // Select a size of table with letters to randomize
+      let size_of_letters = sizeWithValue * sizeWithValue;
+      arrayWithLetters.splice(size_of_letters, 24);
 
-		// Sort random table
-		tab_with_numbers.sort(() => Math.random() - 0.5);
-		tab_with_letters.sort(() => Math.random() - 0.5);
+      // Sort random table
+      arrayWithNumbers.sort(() => Math.random() - 0.5);
+      arrayWithLetters.sort(() => Math.random() - 0.5);
 
-		// Generate table
-		function generate_table() {
-			let table = document.createElement("table");
-			table.setAttribute("id", "main-table");
-			for (let i = 0; i < size_with_value; i++) {
-				let row = document.createElement("tr");
-				row.setAttribute("class", "row_list");
-				for (let j = 0; j < size_with_value; j++) {
-					let cell = document.createElement("td");
-					cell.setAttribute("class", "cell_list");
-					if (type_with_value == 1) {
-						let number = document.createTextNode(tab_with_numbers[counter_of_whiles]);
-						counter_of_whiles++;
-						cell.appendChild(number);
-						row.appendChild(cell);
-					} else if (type_with_value == 2) {
-						let letter = document.createTextNode(tab_with_letters[counter_of_whiles]);
-						counter_of_whiles++;
-						cell.appendChild(letter);
-						row.appendChild(cell);
-					}
-				}
-				table.appendChild(row);
-			}
-			main.appendChild(table);
-			counter++;
-		}
+      // Generate table
+      function generateTable() {
+        let table = document.createElement("table");
+        table.setAttribute("id", "main-table");
+        for (let i = 0; i < sizeWithValue; i++) {
+          let row = document.createElement("tr");
+          row.setAttribute("class", "row_list");
+          for (let j = 0; j < sizeWithValue; j++) {
+            let cell = document.createElement("td");
+            cell.setAttribute("class", "cell_list");
+            if (typeWithValue == 1) {
+              let number = document.createTextNode(
+                arrayWithNumbers[counterOfWhiles]
+              );
+              counterOfWhiles++;
+              cell.appendChild(number);
+              row.appendChild(cell);
+            } else if (typeWithValue == 2) {
+              let letter = document.createTextNode(
+                arrayWithLetters[counterOfWhiles]
+              );
+              counterOfWhiles++;
+              cell.appendChild(letter);
+              row.appendChild(cell);
+            }
+          }
+          table.appendChild(row);
+        }
+        main.appendChild(table);
+        counter++;
+      }
 
-		// Set a value of border style
-		function set_value_of_border() {
-			if (border_with_value == 2) {
-				for (let i = tab.length - 1; i >= 0; i--) {
-					tab[i].style.border = "1px solid white";
-				}
-				for (let i = td.length - 1; i >= 0; i--) {
-					td[i].style.border = "1px solid white";
-				}
-				for (let i = tr.length - 1; i >= 0; i--) {
-					tr[i].style.border = "1px solid white";
-				}
-			}
-		}
+      // Set a value of border style
+      function setValueOfBorder() {
+        if (borderWithValue == 2) {
+          for (let i = tab.length - 1; i >= 0; i--) {
+            tab[i].style.border = "1px solid white";
+          }
+          for (let i = td.length - 1; i >= 0; i--) {
+            td[i].style.border = "1px solid white";
+          }
+          for (let i = tr.length - 1; i >= 0; i--) {
+            tr[i].style.border = "1px solid white";
+          }
+        }
+      }
 
-		// Set a value of cell size
-		function set_value_of_cell() {
-			if (cell_sice_with_value > 0) {
-				for (let i = 1; i < 5; i++) {
-					if (cell_sice_with_value == i * 10) {
-						for (let j = tab.length - 1; j >= 0; j--) {
-							tab[j].style.width = i * 120 + 300 + "px";
-							tab[j].style.height = i * 120 + 300 + "px";
-							tab[j].style.tableLayout = "fixed";
-						}
-					}
-				}
-			}
-		}
+      // Set a value of cell size
+      function setValueOfCell() {
+        if (cellSizeWithValue > 0) {
+          for (let i = 1; i < 5; i++) {
+            if (cellSizeWithValue == i * 10) {
+              for (let j = tab.length - 1; j >= 0; j--) {
+                tab[j].style.width = i * 120 + 300 + "px";
+                tab[j].style.height = i * 120 + 300 + "px";
+                tab[j].style.tableLayout = "fixed";
+              }
+            }
+          }
+        }
+      }
 
-		// Removing table every click on button
-		function removing_table_every_click() {
-			if (counter > 0) {
-				for (let i = tab.length - 1; i >= 0; i--) {
-					tab[i].remove();
-				}
-			}
-		}
+      // Removing table every click on button
+      function removingTableEveryClick() {
+        if (counter > 0) {
+          for (let i = tab.length - 1; i >= 0; i--) {
+            tab[i].remove();
+          }
+        }
+      }
 
-		// Timer
-		function timer() {
-			time = setInterval(clock_up, 10);
-		}
+      // Timer
+      function timer() {
+        time = setInterval(clockUp, 10);
+      }
 
-		function clock_up() {
-			if (counter_time_ms == 100) {
-				counter_time_second++;
-				counter_time_ms = 0;
-			}
-			if (counter_time_second == 60) {
-				counter_time_minute++;
-				counter_time_second = 0;
-			}
-			counter_time_ms++;
-			if (counter_time_second < 10) {
-				p_time.innerHTML = "0" + counter_time_minute + " : " + "0" + counter_time_second + " : " + counter_time_ms;
-			} else if (counter_time_second >= 10) {
-				p_time.innerHTML = "0" + counter_time_minute + " : " + counter_time_second + " : " + counter_time_ms;
-			}
+      function clockUp() {
+        if (counterTimeMs == 100) {
+          counterTimeSeconds++;
+          counterTimeMs = 0;
+        }
+        if (counterTimeSeconds == 60) {
+          counterTimeMinute++;
+          counterTimeSeconds = 0;
+        }
+        counterTimeMs++;
+        if (counterTimeSeconds < 10) {
+          pTime.innerHTML = `0${counterTimeMinute} : 0${counterTimeSeconds} : ${counterTimeMs}`;
+        } else if (counterTimeSeconds >= 10) {
+          pTime.innerHTML = `0${counterTimeMinute} : ${counterTimeSeconds} : ${counterTimeMs}`;
+        }
 
+        if (counterTimeMinute >= 1 && counterTimeSeconds < 10) {
+          pTime.innerHTML = `0${counterTimeMinute} : 0${counterTimeSeconds} : ${counterTimeMs}`;
+        } else if (counterTimeMinute >= 1 && counterTimeSeconds >= 10) {
+          pTime.innerHTML = `0${counterTimeMinute} : ${counterTimeSeconds} : ${counterTimeMs}`;
+        }
 
-			if (counter_time_minute >= 1 && counter_time_second < 10) {
-				p_time.innerHTML = "0" + counter_time_minute + " : " + "0" + counter_time_second + " : " + counter_time_ms;
-			} else if (counter_time_minute >= 1 && counter_time_second >= 10) {
-				p_time.innerHTML = "0" + counter_time_minute + " : " + counter_time_second + " : " + counter_time_ms;
-			}
+        if (counterTimeMinute >= 10 && counterTimeSeconds < 10) {
+          pTime.innerHTML = `${counterTimeMinute} : 0${counterTimeSeconds} : ${counterTimeMs}`;
+        } else if (counterTimeMinute >= 10 && counterTimeSeconds >= 10) {
+          pTime.innerHTML = `${counterTimeMinute} : ${counterTimeSeconds} : ${counterTimeMs}`;
+        }
+      }
+      if (counterBtn % 2 == 0) {
+        menu_time.style.display = "flex";
+        btn.innerHTML = "STOP";
+        counterBtn++;
 
-
-			if (counter_time_minute >= 10 && counter_time_second < 10) {
-				p_time.innerHTML = counter_time_minute + " : " + "0" + counter_time_second + " : " + counter_time_ms;
-			} else if (counter_time_minute >= 10 && counter_time_second >= 10) {
-				p_time.innerHTML = counter_time_minute + " : " + counter_time_second + " : " + counter_time_ms;
-			}
-		}
-
-		//changing state of button
-		if (size_with_value == 100 || cell_sice_with_value == 100 || border_with_value == 100 || type_with_value == 100) {
-			alert("Select all options");
-		} else {
-			if (counter_btn % 2 == 0) {
-				menu_time.style.display = "flex";
-				btn.innerHTML = "STOP";
-				counter_btn++;
-
-				// call the function
-				removing_table_every_click();
-				generate_table();
-				set_value_of_border();
-				set_value_of_cell();
-				timer();
-
-			} else {
-				btn.innerHTML = "START";
-				counter_btn++;
-				clearInterval(time);
-				counter_time_minute = 0;
-				counter_time_ms = 0;
-				counter_time_second = 0;
-			}
-		}
-
-
-
-	})
+        // call the function
+        removingTableEveryClick();
+        generateTable();
+        setValueOfBorder();
+        setValueOfCell();
+        timer();
+      } else {
+        btn.innerHTML = "START";
+        counterBtn++;
+        clearInterval(time);
+        counterTimeMinute = 0;
+        counterTimeMs = 0;
+        counterTimeSeconds = 0;
+      }
+    }
+  });
 });
